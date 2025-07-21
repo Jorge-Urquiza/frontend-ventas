@@ -12,6 +12,7 @@ abstract class InvoiceLine with _$InvoiceLine {
     required double price,
     required int quantity,
     required double discount,
+    required double discountPercentage,
     required double subtotal,
     required Product product,
   }) = _InvoiceLine;

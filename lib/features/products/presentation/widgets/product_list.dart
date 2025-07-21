@@ -47,53 +47,51 @@ class _ProductListState extends State<ProductList> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Listado de Productos',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Color(0xFF004277),
-                    ),
+    return SizedBox(
+      height: double.infinity,
+      width: 500,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Listado de Productos',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Color(0xFF004277),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.refresh),
-                    onPressed: isLoading ? null : fetchProducts,
-                    tooltip: 'Refresh Products',
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Expanded(
-                child: isLoading
-                    ? const Center(child: CircularProgressIndicator())
-                    : products.isEmpty
-                        ? const Center(child: Text('No products found'))
-                        : ListView.builder(
-                            itemCount: products.length,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  CustomProduct(product: products[index]),
-                                  const SizedBox(height: 8),
-                                ],
-                              );
-                            },
-                          ),
-              ),
-            ],
-          ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.refresh),
+                  onPressed: isLoading ? null : fetchProducts,
+                  tooltip: 'Refresh Products',
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Expanded(
+              child: isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : products.isEmpty
+                      ? const Center(child: Text('No products found'))
+                      : ListView.builder(
+                          itemCount: products.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                CustomProduct(product: products[index]),
+                                const SizedBox(height: 8),
+                              ],
+                            );
+                          },
+                        ),
+            ),
+          ],
         ),
       ),
     );

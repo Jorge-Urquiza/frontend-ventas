@@ -19,6 +19,7 @@ mixin _$InvoiceLine {
   double get price;
   int get quantity;
   double get discount;
+  double get discountPercentage;
   double get subtotal;
   Product get product;
 
@@ -42,6 +43,8 @@ mixin _$InvoiceLine {
                 other.quantity == quantity) &&
             (identical(other.discount, discount) ||
                 other.discount == discount) &&
+            (identical(other.discountPercentage, discountPercentage) ||
+                other.discountPercentage == discountPercentage) &&
             (identical(other.subtotal, subtotal) ||
                 other.subtotal == subtotal) &&
             (identical(other.product, product) || other.product == product));
@@ -49,12 +52,12 @@ mixin _$InvoiceLine {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, price, quantity, discount, subtotal, product);
+  int get hashCode => Object.hash(runtimeType, price, quantity, discount,
+      discountPercentage, subtotal, product);
 
   @override
   String toString() {
-    return 'InvoiceLine(price: $price, quantity: $quantity, discount: $discount, subtotal: $subtotal, product: $product)';
+    return 'InvoiceLine(price: $price, quantity: $quantity, discount: $discount, discountPercentage: $discountPercentage, subtotal: $subtotal, product: $product)';
   }
 }
 
@@ -68,6 +71,7 @@ abstract mixin class $InvoiceLineCopyWith<$Res> {
       {double price,
       int quantity,
       double discount,
+      double discountPercentage,
       double subtotal,
       Product product});
 
@@ -89,6 +93,7 @@ class _$InvoiceLineCopyWithImpl<$Res> implements $InvoiceLineCopyWith<$Res> {
     Object? price = null,
     Object? quantity = null,
     Object? discount = null,
+    Object? discountPercentage = null,
     Object? subtotal = null,
     Object? product = null,
   }) {
@@ -104,6 +109,10 @@ class _$InvoiceLineCopyWithImpl<$Res> implements $InvoiceLineCopyWith<$Res> {
       discount: null == discount
           ? _self.discount
           : discount // ignore: cast_nullable_to_non_nullable
+              as double,
+      discountPercentage: null == discountPercentage
+          ? _self.discountPercentage
+          : discountPercentage // ignore: cast_nullable_to_non_nullable
               as double,
       subtotal: null == subtotal
           ? _self.subtotal
@@ -134,6 +143,7 @@ class _InvoiceLine implements InvoiceLine {
       {required this.price,
       required this.quantity,
       required this.discount,
+      required this.discountPercentage,
       required this.subtotal,
       required this.product});
   factory _InvoiceLine.fromJson(Map<String, dynamic> json) =>
@@ -146,6 +156,8 @@ class _InvoiceLine implements InvoiceLine {
   final int quantity;
   @override
   final double discount;
+  @override
+  final double discountPercentage;
   @override
   final double subtotal;
   @override
@@ -176,6 +188,8 @@ class _InvoiceLine implements InvoiceLine {
                 other.quantity == quantity) &&
             (identical(other.discount, discount) ||
                 other.discount == discount) &&
+            (identical(other.discountPercentage, discountPercentage) ||
+                other.discountPercentage == discountPercentage) &&
             (identical(other.subtotal, subtotal) ||
                 other.subtotal == subtotal) &&
             (identical(other.product, product) || other.product == product));
@@ -183,12 +197,12 @@ class _InvoiceLine implements InvoiceLine {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, price, quantity, discount, subtotal, product);
+  int get hashCode => Object.hash(runtimeType, price, quantity, discount,
+      discountPercentage, subtotal, product);
 
   @override
   String toString() {
-    return 'InvoiceLine(price: $price, quantity: $quantity, discount: $discount, subtotal: $subtotal, product: $product)';
+    return 'InvoiceLine(price: $price, quantity: $quantity, discount: $discount, discountPercentage: $discountPercentage, subtotal: $subtotal, product: $product)';
   }
 }
 
@@ -204,6 +218,7 @@ abstract mixin class _$InvoiceLineCopyWith<$Res>
       {double price,
       int quantity,
       double discount,
+      double discountPercentage,
       double subtotal,
       Product product});
 
@@ -226,6 +241,7 @@ class __$InvoiceLineCopyWithImpl<$Res> implements _$InvoiceLineCopyWith<$Res> {
     Object? price = null,
     Object? quantity = null,
     Object? discount = null,
+    Object? discountPercentage = null,
     Object? subtotal = null,
     Object? product = null,
   }) {
@@ -241,6 +257,10 @@ class __$InvoiceLineCopyWithImpl<$Res> implements _$InvoiceLineCopyWith<$Res> {
       discount: null == discount
           ? _self.discount
           : discount // ignore: cast_nullable_to_non_nullable
+              as double,
+      discountPercentage: null == discountPercentage
+          ? _self.discountPercentage
+          : discountPercentage // ignore: cast_nullable_to_non_nullable
               as double,
       subtotal: null == subtotal
           ? _self.subtotal

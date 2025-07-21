@@ -32,6 +32,7 @@ class InvoiceRepositoryRemote implements InvoiceRepository {
         price: body.product.price,
         quantity: body.quantity,
         discount: body.discount,
+        discountPercentage: body.discountPercentage,
         subtotal: body.subtotal,
         product: body.product,
       );

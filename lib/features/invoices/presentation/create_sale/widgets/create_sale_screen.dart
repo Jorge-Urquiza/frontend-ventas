@@ -344,34 +344,41 @@ class _CreateSaleScreenState extends State<CreateSaleScreen> {
         return Container(
           width: double.infinity,
           child: DataTable(
+            clipBehavior: Clip.antiAlias,
             columns: const [
               DataColumn(label: Text('Nro.')),
               DataColumn(label: Text('Producto')),
               DataColumn(label: Text('Grupo')),
-              DataColumn(label: Text('Precio')),
+              DataColumn(label: Text('Precio (Bs.)')),
               DataColumn(label: Text('Cantidad')),
-              DataColumn(label: Text('Descuento')),
-              DataColumn(label: Text('Subtotal')),
+              DataColumn(label: Text('Descuento %')),
+              DataColumn(label: Text('Descuento (Bs.)')),
+              DataColumn(label: Text('Subtotal (Bs.)')),
               DataColumn(label: Text('')),
             ],
             rows: widget.viewModel.invoiceLines.asMap().entries.map((entry) {
               final index = entry.key;
               final line = entry.value;
 
-              final discountLine = (line.product.productGroup.discount ?? 0) > 0
-                  ? " (-${line.product.productGroup.discount}%)"
-                  : "";
+              // final discountLine = (line.product.productGroup.discount ?? 0) > 0
+              //     ? " (-${line.product.productGroup.discount}%)"
+              //     : "";
+
+              final productGroupDiscount =
+                  (line.product.productGroup.discount ?? 0);
+
+              final clientGroupDiscount =
+                  (widget.viewModel.selectedClient!.clientGroup!.discount ?? 0);
 
               return DataRow(cells: [
                 DataCell(Text('${index + 1}')),
                 DataCell(Text(line.product.name)),
-                DataCell(
-                  Text(
-                    "${line.product.productGroup.code}$discountLine",
-                  ),
-                ),
+                DataCell(Text(line.product.productGroup.code)),
                 DataCell(Text(line.price.toStringAsFixed(2))),
                 DataCell(Text(line.quantity.toString())),
+                // DataCell(Text(productGroupDiscount.toStringAsFixed(2))),
+                // DataCell(Text(clientGroupDiscount.toStringAsFixed(2))),
+                DataCell(Text(line.discountPercentage.toStringAsFixed(2))),
                 DataCell(Text(line.discount.toStringAsFixed(2))),
                 DataCell(Text(line.subtotal.toStringAsFixed(2))),
                 DataCell(
@@ -402,15 +409,15 @@ class _CreateSaleScreenState extends State<CreateSaleScreen> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                'Subtotal: ${widget.viewModel.invoiceSummary.subtotal.toStringAsFixed(2)}',
+                'Subtotal:  Bs. ${widget.viewModel.invoiceSummary.subtotal.toStringAsFixed(2)}',
                 style: theme.textTheme.bodyLarge,
               ),
               Text(
-                'Descuento: ${widget.viewModel.invoiceSummary.discount.toStringAsFixed(2)}',
+                'Descuento: Bs. ${widget.viewModel.invoiceSummary.discount.toStringAsFixed(2)}',
                 style: theme.textTheme.bodyLarge,
               ),
               Text(
-                'Total de venta: ${widget.viewModel.invoiceSummary.total.toStringAsFixed(2)}',
+                'Total de venta: Bs. ${widget.viewModel.invoiceSummary.total.toStringAsFixed(2)}',
                 style: theme.textTheme.bodyLarge!.copyWith(
                   color: Colors.green,
                   fontWeight: FontWeight.bold,

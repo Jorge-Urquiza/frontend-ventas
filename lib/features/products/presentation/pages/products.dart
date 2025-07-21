@@ -67,13 +67,22 @@ class _ProductsAppState extends State<ProductsApp> {
         home: Scaffold(
           body: Center(
             child: Row(
+              spacing: 16.0,
               children: [
-                const ProductList(),
-                CreateSaleScreen(
-                  viewModel: CreateSaleViewModel(
-                    productRepository: context.read(),
-                    clientRepository: context.read(),
-                    invoiceRepository: context.read(),
+                const Flexible(
+                  flex: 0,
+                  fit: FlexFit.tight,
+                  child: ProductList(),
+                ),
+                Flexible(
+                  flex: 1,
+                  fit: FlexFit.loose,
+                  child: CreateSaleScreen(
+                    viewModel: CreateSaleViewModel(
+                      productRepository: context.read(),
+                      clientRepository: context.read(),
+                      invoiceRepository: context.read(),
+                    ),
                   ),
                 ),
               ],
