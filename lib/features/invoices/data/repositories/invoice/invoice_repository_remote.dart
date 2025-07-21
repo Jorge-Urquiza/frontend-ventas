@@ -1,5 +1,6 @@
 import 'package:solid_products/common/result.dart';
 import 'package:solid_products/features/invoices/data/remote/api_service.dart';
+import 'package:solid_products/features/invoices/data/remote/request/product_calculation_request.dart';
 import 'package:solid_products/features/invoices/data/repositories/invoice/invoice_repository.dart';
 import 'package:solid_products/features/invoices/domain/model/client/client.dart';
 import 'package:solid_products/features/invoices/domain/model/invoice/invoice.dart';
@@ -19,24 +20,23 @@ class InvoiceRepositoryRemote implements InvoiceRepository {
     required int quantity,
   }) async {
     try {
-      // final response = await _apiService.saveInvoice(invoice);
-      // final body = response.body!;
-      // return Result.ok(body);
-      final baseTotal = product.price * quantity;
-      final discount = product.productGroup.discount != null &&
-              product.productGroup.discount! >= 0.0
-          ? baseTotal * (product.productGroup.discount! / 100.0)
-          : 0.0;
-      final body = await Future.value(
-        InvoiceLine(
-          price: product.price,
-          quantity: quantity,
-          discount: discount,
-          subtotal: product.price * quantity - discount,
-          product: product,
-        ),
+      final request = ProductCalculationRequest(
+        clientId: client.id,
+        productId: product.id,
+        quantity: quantity,
       );
-      return Result.ok(body);
+      final response = await _apiService.calculateInvoiceLine(request);
+      print("Response invoice: $response");
+      final body = response.body!;
+      final invoiceLine = InvoiceLine(
+        price: body.product.price,
+        quantity: body.quantity,
+        discount: body.discount,
+        subtotal: body.subtotal,
+        product: body.product,
+      );
+
+      return Result.ok(invoiceLine);
     } on Exception catch (e) {
       return Result.error(e);
     }
@@ -45,6 +45,7 @@ class InvoiceRepositoryRemote implements InvoiceRepository {
   @override
   Future<Result<Invoice>> save(Invoice invoice) async {
     try {
+      print(invoice.toJson());
       final response = await _apiService.saveInvoice(invoice);
       final body = response.body!;
       return Result.ok(body);

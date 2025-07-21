@@ -13,36 +13,36 @@ class ProductRepositoryRemote implements ProductRepository {
   @override
   Future<Result<List<Product>>> get() async {
     try {
-      // final response = await _apiService.getProducts();
-      // final body = response.body!;
-      // return Result.ok(body.data);
+      final response = await _apiService.getProducts();
+      final body = response.body!;
+      return Result.ok(body);
 
-      final products = [
-        const Product(
-          name: "Producto A",
-          code: "PRD001",
-          price: 120,
-          productGroup: ProductGroup(
-            code: "GRP001",
-            name: "Medicamentos",
-            id: 1,
-          ),
-          id: 1,
-        ),
-        const Product(
-          id: 2,
-          name: "Producto B",
-          code: "PRD002",
-          price: 120,
-          productGroup: ProductGroup(
-            code: "GRP002",
-            name: "COMIDA",
-            discount: 7,
-            id: 1,
-          ),
-        ),
-      ];
-      return Result.ok(products);
+      // final products = [
+      //   const Product(
+      //     name: "Producto A",
+      //     code: "PRD001",
+      //     price: 120,
+      //     productGroup: ProductGroup(
+      //       code: "GRP001",
+      //       name: "Medicamentos",
+      //       id: 1,
+      //     ),
+      //     id: 1,
+      //   ),
+      //   const Product(
+      //     id: 2,
+      //     name: "Producto B",
+      //     code: "PRD002",
+      //     price: 120,
+      //     productGroup: ProductGroup(
+      //       code: "GRP002",
+      //       name: "COMIDA",
+      //       discount: 7,
+      //       id: 1,
+      //     ),
+      //   ),
+      // ];
+      // return Result.ok(products);
     } on Exception catch (e) {
       return Result.error(e);
     }

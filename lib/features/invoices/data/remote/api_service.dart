@@ -1,25 +1,29 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
-import 'package:solid_products/features/invoices/data/remote/response/client/client_response.dart';
-import 'package:solid_products/features/invoices/data/remote/response/product/product_response.dart';
+import 'package:solid_products/features/invoices/data/remote/request/product_calculation_request.dart';
+import 'package:solid_products/features/invoices/data/remote/response/product_calculation/product_calculation_response.dart';
+import 'package:solid_products/features/invoices/domain/model/client/client.dart';
 import 'package:solid_products/features/invoices/domain/model/invoice/invoice.dart';
 import 'package:solid_products/features/invoices/domain/model/invoice_line/invoice_line.dart';
+import 'package:solid_products/features/invoices/domain/model/product/product.dart';
 
 part 'api_service.chopper.dart';
 
-@ChopperApi(baseUrl: "/api")
+@ChopperApi(baseUrl: "/v1")
 abstract class ApiService extends ChopperService {
   static ApiService create([ChopperClient? client]) => _$ApiService(client);
 
-  @GET(path: "products/")
-  Future<Response<ProductResponse>> getProducts();
+  @GET(path: "products")
+  Future<Response<List<Product>>> getProducts();
 
-  @GET(path: "clients/")
-  Future<Response<ClientResponse>> getClients();
+  @GET(path: "clients")
+  Future<Response<List<Client>>> getClients();
 
-  @GET(path: "invoice/")
+  @GET(path: "invoice")
   Future<Response<Invoice>> saveInvoice(Invoice invoice);
 
-  @GET(path: "invoice/")
-  Future<Response<InvoiceLine>> calculateInvoiceLine(InvoiceLine invoiceLine);
+  @POST(path: "productCalculation")
+  Future<Response<ProductCalculationResponse>> calculateInvoiceLine(
+    @Body() ProductCalculationRequest body,
+  );
 }

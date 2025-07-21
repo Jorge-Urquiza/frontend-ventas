@@ -179,7 +179,7 @@ class _CreateSaleScreenState extends State<CreateSaleScreen> {
               var label = "${client.name} - ${client.clientGroup?.code}";
               if ((client.clientGroup?.discount ?? 0) > 0) {
                 label +=
-                    " - ${client.clientGroup!.discount?.toStringAsFixed(0)}%";
+                    " - ${client.clientGroup!.discount?.toStringAsFixed(2)}%";
               }
               return DropdownMenuItem<Client>(
                 value: client,
@@ -237,11 +237,11 @@ class _CreateSaleScreenState extends State<CreateSaleScreen> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (widget.viewModel.loadProducts.error) {
-          return Center(
-            child: Text("Error: ${widget.viewModel.loadProducts.error}"),
-          );
-        }
+        // if (widget.viewModel.loadProducts.error) {
+        //   return Center(
+        //     child: Text("Error: ${widget.viewModel.loadProducts.error}"),
+        //   );
+        // }
 
         return child!;
       },
@@ -253,7 +253,7 @@ class _CreateSaleScreenState extends State<CreateSaleScreen> {
               var label = "${product.name} - ${product.productGroup.code}";
               if ((product.productGroup.discount ?? 0) > 0) {
                 label +=
-                    " - ${product.productGroup.discount?.toStringAsFixed(0)}%";
+                    " - ${product.productGroup.discount?.toStringAsFixed(2)}%";
               }
 
               return DropdownMenuItem<Product>(

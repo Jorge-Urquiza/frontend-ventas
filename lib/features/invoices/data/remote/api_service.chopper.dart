@@ -19,30 +19,30 @@ final class _$ApiService extends ApiService {
   final Type definitionType = ApiService;
 
   @override
-  Future<Response<ProductResponse>> getProducts() {
-    final Uri $url = Uri.parse('/api/products/');
+  Future<Response<List<Product>>> getProducts() {
+    final Uri $url = Uri.parse('/v1/products');
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
     );
-    return client.send<ProductResponse, ProductResponse>($request);
+    return client.send<List<Product>, Product>($request);
   }
 
   @override
-  Future<Response<ClientResponse>> getClients() {
-    final Uri $url = Uri.parse('/api/clients/');
+  Future<Response<List<Client>>> getClients() {
+    final Uri $url = Uri.parse('/v1/clients');
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
     );
-    return client.send<ClientResponse, ClientResponse>($request);
+    return client.send<List<Client>, Client>($request);
   }
 
   @override
   Future<Response<Invoice>> saveInvoice(Invoice invoice) {
-    final Uri $url = Uri.parse('/api/invoice/');
+    final Uri $url = Uri.parse('/v1/invoice');
     final Request $request = Request(
       'GET',
       $url,
@@ -52,13 +52,17 @@ final class _$ApiService extends ApiService {
   }
 
   @override
-  Future<Response<InvoiceLine>> calculateInvoiceLine(InvoiceLine invoiceLine) {
-    final Uri $url = Uri.parse('/api/invoice/');
+  Future<Response<ProductCalculationResponse>> calculateInvoiceLine(
+      ProductCalculationRequest body) {
+    final Uri $url = Uri.parse('/v1/productCalculation');
+    final $body = body;
     final Request $request = Request(
-      'GET',
+      'POST',
       $url,
       client.baseUrl,
+      body: $body,
     );
-    return client.send<InvoiceLine, InvoiceLine>($request);
+    return client
+        .send<ProductCalculationResponse, ProductCalculationResponse>($request);
   }
 }
