@@ -1,0 +1,237 @@
+// dart format width=80
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'client.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+// dart format off
+T _$identity<T>(T value) => value;
+
+/// @nodoc
+mixin _$Client {
+  int get id;
+  String get code;
+  String get name;
+  ClientGroup? get clientGroup;
+
+  /// Create a copy of Client
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ClientCopyWith<Client> get copyWith =>
+      _$ClientCopyWithImpl<Client>(this as Client, _$identity);
+
+  /// Serializes this Client to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Client &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.clientGroup, clientGroup) ||
+                other.clientGroup == clientGroup));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, code, name, clientGroup);
+
+  @override
+  String toString() {
+    return 'Client(id: $id, code: $code, name: $name, clientGroup: $clientGroup)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ClientCopyWith<$Res> {
+  factory $ClientCopyWith(Client value, $Res Function(Client) _then) =
+      _$ClientCopyWithImpl;
+  @useResult
+  $Res call({int id, String code, String name, ClientGroup? clientGroup});
+
+  $ClientGroupCopyWith<$Res>? get clientGroup;
+}
+
+/// @nodoc
+class _$ClientCopyWithImpl<$Res> implements $ClientCopyWith<$Res> {
+  _$ClientCopyWithImpl(this._self, this._then);
+
+  final Client _self;
+  final $Res Function(Client) _then;
+
+  /// Create a copy of Client
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? code = null,
+    Object? name = null,
+    Object? clientGroup = freezed,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      code: null == code
+          ? _self.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      clientGroup: freezed == clientGroup
+          ? _self.clientGroup
+          : clientGroup // ignore: cast_nullable_to_non_nullable
+              as ClientGroup?,
+    ));
+  }
+
+  /// Create a copy of Client
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ClientGroupCopyWith<$Res>? get clientGroup {
+    if (_self.clientGroup == null) {
+      return null;
+    }
+
+    return $ClientGroupCopyWith<$Res>(_self.clientGroup!, (value) {
+      return _then(_self.copyWith(clientGroup: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Client implements Client {
+  const _Client(
+      {required this.id,
+      required this.code,
+      required this.name,
+      this.clientGroup});
+  factory _Client.fromJson(Map<String, dynamic> json) => _$ClientFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final String code;
+  @override
+  final String name;
+  @override
+  final ClientGroup? clientGroup;
+
+  /// Create a copy of Client
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ClientCopyWith<_Client> get copyWith =>
+      __$ClientCopyWithImpl<_Client>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ClientToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Client &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.clientGroup, clientGroup) ||
+                other.clientGroup == clientGroup));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, code, name, clientGroup);
+
+  @override
+  String toString() {
+    return 'Client(id: $id, code: $code, name: $name, clientGroup: $clientGroup)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ClientCopyWith<$Res> implements $ClientCopyWith<$Res> {
+  factory _$ClientCopyWith(_Client value, $Res Function(_Client) _then) =
+      __$ClientCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int id, String code, String name, ClientGroup? clientGroup});
+
+  @override
+  $ClientGroupCopyWith<$Res>? get clientGroup;
+}
+
+/// @nodoc
+class __$ClientCopyWithImpl<$Res> implements _$ClientCopyWith<$Res> {
+  __$ClientCopyWithImpl(this._self, this._then);
+
+  final _Client _self;
+  final $Res Function(_Client) _then;
+
+  /// Create a copy of Client
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? code = null,
+    Object? name = null,
+    Object? clientGroup = freezed,
+  }) {
+    return _then(_Client(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      code: null == code
+          ? _self.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      clientGroup: freezed == clientGroup
+          ? _self.clientGroup
+          : clientGroup // ignore: cast_nullable_to_non_nullable
+              as ClientGroup?,
+    ));
+  }
+
+  /// Create a copy of Client
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ClientGroupCopyWith<$Res>? get clientGroup {
+    if (_self.clientGroup == null) {
+      return null;
+    }
+
+    return $ClientGroupCopyWith<$Res>(_self.clientGroup!, (value) {
+      return _then(_self.copyWith(clientGroup: value));
+    });
+  }
+}
+
+// dart format on

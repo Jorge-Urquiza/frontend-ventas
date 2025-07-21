@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:solid_products/features/invoices/presentation/create_sale/view_model/create_sale_view_model.dart';
+import 'package:solid_products/features/invoices/presentation/create_sale/widgets/create_sale_screen.dart';
 import 'package:solid_products/features/products/presentation/widgets/product_list.dart';
 import 'package:solid_products/features/products/presentation/widgets/sale_create.dart';
+import 'package:toastification/toastification.dart';
 
 class ProductsApp extends StatefulWidget {
   const ProductsApp({super.key});
@@ -35,15 +39,45 @@ class _ProductsAppState extends State<ProductsApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Row(
-            children: const [
-              ProductList(),
-              SaleCreate(),
-            ],
+    const color = Color.fromRGBO(0, 66, 119, 1.0);
+    const highlight = Color.fromRGBO(48, 63, 159, 1);
+    var seed = ColorScheme.fromSeed(seedColor: color, secondary: highlight);
+    return ToastificationWrapper(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.light,
+          useMaterial3: true,
+          colorSchemeSeed: color,
+          listTileTheme: ListTileThemeData(
+            titleTextStyle: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
+              fontFamily: 'GT-Walsheim',
+              color: seed.onPrimaryContainer,
+            ),
+            subtitleTextStyle: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 14,
+              fontFamily: 'GT-Walsheim',
+              color: seed.onSecondaryContainer,
+            ),
+          ),
+        ),
+        home: Scaffold(
+          body: Center(
+            child: Row(
+              children: [
+                const ProductList(),
+                CreateSaleScreen(
+                  viewModel: CreateSaleViewModel(
+                    productRepository: context.read(),
+                    clientRepository: context.read(),
+                    invoiceRepository: context.read(),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
