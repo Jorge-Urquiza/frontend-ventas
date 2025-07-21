@@ -43,10 +43,12 @@ final class _$ApiService extends ApiService {
   @override
   Future<Response<Invoice>> saveInvoice(Invoice invoice) {
     final Uri $url = Uri.parse('/v1/invoice');
+    final $body = invoice;
     final Request $request = Request(
-      'GET',
+      'POST',
       $url,
       client.baseUrl,
+      body: $body,
     );
     return client.send<Invoice, Invoice>($request);
   }
@@ -64,5 +66,16 @@ final class _$ApiService extends ApiService {
     );
     return client
         .send<ProductCalculationResponse, ProductCalculationResponse>($request);
+  }
+
+  @override
+  Future<Response<List<PaymentCondition>>> getPaymentConditions() {
+    final Uri $url = Uri.parse('/v1/payment-conditions');
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<List<PaymentCondition>, PaymentCondition>($request);
   }
 }

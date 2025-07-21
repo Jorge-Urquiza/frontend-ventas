@@ -5,6 +5,7 @@ import 'package:solid_products/common/command.dart';
 import 'package:solid_products/common/result.dart';
 import 'package:solid_products/features/invoices/data/repositories/client/client_repository.dart';
 import 'package:solid_products/features/invoices/data/repositories/invoice/invoice_repository.dart';
+import 'package:solid_products/features/invoices/data/repositories/payment_condition/payment_condition_repository.dart';
 import 'package:solid_products/features/invoices/data/repositories/product/product_repository.dart';
 import 'package:solid_products/features/invoices/domain/model/client/client.dart';
 import 'package:solid_products/features/invoices/domain/model/invoice/invoice.dart';
@@ -17,11 +18,14 @@ class CreateSaleViewModel extends ChangeNotifier {
     required ProductRepository productRepository,
     required ClientRepository clientRepository,
     required InvoiceRepository invoiceRepository,
+    required PaymentConditionRepository paymentConditionRepository,
   })  : _productRepository = productRepository,
         _clientRepository = clientRepository,
-        _invoiceRepository = invoiceRepository {
+        _invoiceRepository = invoiceRepository,
+        _paymentConditionRepository = paymentConditionRepository {
     loadClients = Command0(_loadClients)..execute();
     loadProducts = Command0(_loadProducts)..execute();
+    loadPaymentConditions = Command0(_loadPaymentConditions)..execute();
     addProduct = Command1(_addProduct);
     deleteProduct = Command1(_deleteProduct);
     saveInvoice = Command1(_saveInvoice);
@@ -30,9 +34,11 @@ class CreateSaleViewModel extends ChangeNotifier {
   final ProductRepository _productRepository;
   final ClientRepository _clientRepository;
   final InvoiceRepository _invoiceRepository;
+  final PaymentConditionRepository _paymentConditionRepository;
 
   late Command0 loadClients;
   late Command0 loadProducts;
+  late Command0 loadPaymentConditions;
   late Command1<void, int> addProduct;
   late Command1<void, int> deleteProduct;
   late Command1<void, InvoiceHeader> saveInvoice;
@@ -40,9 +46,9 @@ class CreateSaleViewModel extends ChangeNotifier {
   List<Client> _clients = [];
   List<Product> _products = [];
   List<PaymentCondition> _paymentConditions = [
-    PaymentCondition(id: 1, name: "Contado"),
-    PaymentCondition(id: 2, name: "Crédito 30 días"),
-    PaymentCondition(id: 2, name: "Crédito 60 días"),
+    // PaymentCondition(id: 1, name: "Contado"),
+    // PaymentCondition(id: 2, name: "Crédito 30 días"),
+    // PaymentCondition(id: 2, name: "Crédito 60 días"),
   ];
   Client? _selectedClient;
   Product? _selectedProduct;
@@ -113,6 +119,21 @@ class CreateSaleViewModel extends ChangeNotifier {
     }
   }
 
+  Future<Result> _loadPaymentConditions() async {
+    try {
+      final result = await _paymentConditionRepository.get();
+      switch (result) {
+        case Ok<List<PaymentCondition>>():
+          _paymentConditions = result.value;
+        case Error<List<PaymentCondition>>():
+          print("error ${result.error}");
+      }
+      return result;
+    } finally {
+      notifyListeners();
+    }
+  }
+
   Future<Result<InvoiceLine>> _addProduct(int quantity) async {
     try {
       if (_selectedProduct == null) {
@@ -172,10 +193,12 @@ class CreateSaleViewModel extends ChangeNotifier {
   Future<Result> _saveInvoice(InvoiceHeader header) async {
     try {
       final invoice = Invoice(
-        nit: header.nit,
+        nit: int.parse(header.nit),
         businessName: header.businessName,
         total: invoiceSummary.total,
         client: _selectedClient,
+        invoiceDetails: _invoiceLines,
+        paymentCondition: _selectedPaymentCondition,
       );
       final result = await _invoiceRepository.save(invoice);
       switch (result) {

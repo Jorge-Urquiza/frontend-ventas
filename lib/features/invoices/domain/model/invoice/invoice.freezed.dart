@@ -15,11 +15,11 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Invoice implements DiagnosticableTreeMixin {
-  String get nit;
+  int get nit;
   String get businessName;
   double get total;
   Client? get client;
-  List<InvoiceLine>? get invoiceLines;
+  List<InvoiceLine>? get invoiceDetails;
   PaymentCondition? get paymentCondition;
 
   /// Create a copy of Invoice
@@ -40,7 +40,7 @@ mixin _$Invoice implements DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('businessName', businessName))
       ..add(DiagnosticsProperty('total', total))
       ..add(DiagnosticsProperty('client', client))
-      ..add(DiagnosticsProperty('invoiceLines', invoiceLines))
+      ..add(DiagnosticsProperty('invoiceDetails', invoiceDetails))
       ..add(DiagnosticsProperty('paymentCondition', paymentCondition));
   }
 
@@ -55,7 +55,7 @@ mixin _$Invoice implements DiagnosticableTreeMixin {
             (identical(other.total, total) || other.total == total) &&
             (identical(other.client, client) || other.client == client) &&
             const DeepCollectionEquality()
-                .equals(other.invoiceLines, invoiceLines) &&
+                .equals(other.invoiceDetails, invoiceDetails) &&
             (identical(other.paymentCondition, paymentCondition) ||
                 other.paymentCondition == paymentCondition));
   }
@@ -63,11 +63,11 @@ mixin _$Invoice implements DiagnosticableTreeMixin {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, nit, businessName, total, client,
-      const DeepCollectionEquality().hash(invoiceLines), paymentCondition);
+      const DeepCollectionEquality().hash(invoiceDetails), paymentCondition);
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Invoice(nit: $nit, businessName: $businessName, total: $total, client: $client, invoiceLines: $invoiceLines, paymentCondition: $paymentCondition)';
+    return 'Invoice(nit: $nit, businessName: $businessName, total: $total, client: $client, invoiceDetails: $invoiceDetails, paymentCondition: $paymentCondition)';
   }
 }
 
@@ -77,11 +77,11 @@ abstract mixin class $InvoiceCopyWith<$Res> {
       _$InvoiceCopyWithImpl;
   @useResult
   $Res call(
-      {String nit,
+      {int nit,
       String businessName,
       double total,
       Client? client,
-      List<InvoiceLine>? invoiceLines,
+      List<InvoiceLine>? invoiceDetails,
       PaymentCondition? paymentCondition});
 
   $ClientCopyWith<$Res>? get client;
@@ -104,14 +104,14 @@ class _$InvoiceCopyWithImpl<$Res> implements $InvoiceCopyWith<$Res> {
     Object? businessName = null,
     Object? total = null,
     Object? client = freezed,
-    Object? invoiceLines = freezed,
+    Object? invoiceDetails = freezed,
     Object? paymentCondition = freezed,
   }) {
     return _then(_self.copyWith(
       nit: null == nit
           ? _self.nit
           : nit // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       businessName: null == businessName
           ? _self.businessName
           : businessName // ignore: cast_nullable_to_non_nullable
@@ -124,9 +124,9 @@ class _$InvoiceCopyWithImpl<$Res> implements $InvoiceCopyWith<$Res> {
           ? _self.client
           : client // ignore: cast_nullable_to_non_nullable
               as Client?,
-      invoiceLines: freezed == invoiceLines
-          ? _self.invoiceLines
-          : invoiceLines // ignore: cast_nullable_to_non_nullable
+      invoiceDetails: freezed == invoiceDetails
+          ? _self.invoiceDetails
+          : invoiceDetails // ignore: cast_nullable_to_non_nullable
               as List<InvoiceLine>?,
       paymentCondition: freezed == paymentCondition
           ? _self.paymentCondition
@@ -172,26 +172,26 @@ class _Invoice with DiagnosticableTreeMixin implements Invoice {
       required this.businessName,
       required this.total,
       this.client,
-      final List<InvoiceLine>? invoiceLines,
+      final List<InvoiceLine>? invoiceDetails,
       this.paymentCondition})
-      : _invoiceLines = invoiceLines;
+      : _invoiceDetails = invoiceDetails;
   factory _Invoice.fromJson(Map<String, dynamic> json) =>
       _$InvoiceFromJson(json);
 
   @override
-  final String nit;
+  final int nit;
   @override
   final String businessName;
   @override
   final double total;
   @override
   final Client? client;
-  final List<InvoiceLine>? _invoiceLines;
+  final List<InvoiceLine>? _invoiceDetails;
   @override
-  List<InvoiceLine>? get invoiceLines {
-    final value = _invoiceLines;
+  List<InvoiceLine>? get invoiceDetails {
+    final value = _invoiceDetails;
     if (value == null) return null;
-    if (_invoiceLines is EqualUnmodifiableListView) return _invoiceLines;
+    if (_invoiceDetails is EqualUnmodifiableListView) return _invoiceDetails;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -222,7 +222,7 @@ class _Invoice with DiagnosticableTreeMixin implements Invoice {
       ..add(DiagnosticsProperty('businessName', businessName))
       ..add(DiagnosticsProperty('total', total))
       ..add(DiagnosticsProperty('client', client))
-      ..add(DiagnosticsProperty('invoiceLines', invoiceLines))
+      ..add(DiagnosticsProperty('invoiceDetails', invoiceDetails))
       ..add(DiagnosticsProperty('paymentCondition', paymentCondition));
   }
 
@@ -237,7 +237,7 @@ class _Invoice with DiagnosticableTreeMixin implements Invoice {
             (identical(other.total, total) || other.total == total) &&
             (identical(other.client, client) || other.client == client) &&
             const DeepCollectionEquality()
-                .equals(other._invoiceLines, _invoiceLines) &&
+                .equals(other._invoiceDetails, _invoiceDetails) &&
             (identical(other.paymentCondition, paymentCondition) ||
                 other.paymentCondition == paymentCondition));
   }
@@ -245,11 +245,11 @@ class _Invoice with DiagnosticableTreeMixin implements Invoice {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, nit, businessName, total, client,
-      const DeepCollectionEquality().hash(_invoiceLines), paymentCondition);
+      const DeepCollectionEquality().hash(_invoiceDetails), paymentCondition);
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Invoice(nit: $nit, businessName: $businessName, total: $total, client: $client, invoiceLines: $invoiceLines, paymentCondition: $paymentCondition)';
+    return 'Invoice(nit: $nit, businessName: $businessName, total: $total, client: $client, invoiceDetails: $invoiceDetails, paymentCondition: $paymentCondition)';
   }
 }
 
@@ -260,11 +260,11 @@ abstract mixin class _$InvoiceCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String nit,
+      {int nit,
       String businessName,
       double total,
       Client? client,
-      List<InvoiceLine>? invoiceLines,
+      List<InvoiceLine>? invoiceDetails,
       PaymentCondition? paymentCondition});
 
   @override
@@ -289,14 +289,14 @@ class __$InvoiceCopyWithImpl<$Res> implements _$InvoiceCopyWith<$Res> {
     Object? businessName = null,
     Object? total = null,
     Object? client = freezed,
-    Object? invoiceLines = freezed,
+    Object? invoiceDetails = freezed,
     Object? paymentCondition = freezed,
   }) {
     return _then(_Invoice(
       nit: null == nit
           ? _self.nit
           : nit // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       businessName: null == businessName
           ? _self.businessName
           : businessName // ignore: cast_nullable_to_non_nullable
@@ -309,9 +309,9 @@ class __$InvoiceCopyWithImpl<$Res> implements _$InvoiceCopyWith<$Res> {
           ? _self.client
           : client // ignore: cast_nullable_to_non_nullable
               as Client?,
-      invoiceLines: freezed == invoiceLines
-          ? _self._invoiceLines
-          : invoiceLines // ignore: cast_nullable_to_non_nullable
+      invoiceDetails: freezed == invoiceDetails
+          ? _self._invoiceDetails
+          : invoiceDetails // ignore: cast_nullable_to_non_nullable
               as List<InvoiceLine>?,
       paymentCondition: freezed == paymentCondition
           ? _self.paymentCondition

@@ -69,11 +69,11 @@ class _ProductsAppState extends State<ProductsApp> {
             child: Row(
               spacing: 16.0,
               children: [
-                const Flexible(
-                  flex: 0,
-                  fit: FlexFit.tight,
-                  child: ProductList(),
-                ),
+                // const Flexible(
+                //   flex: 0,
+                //   fit: FlexFit.tight,
+                //   child: ProductList(),
+                // ),
                 Flexible(
                   flex: 1,
                   fit: FlexFit.loose,
@@ -82,6 +82,7 @@ class _ProductsAppState extends State<ProductsApp> {
                       productRepository: context.read(),
                       clientRepository: context.read(),
                       invoiceRepository: context.read(),
+                      paymentConditionRepository: context.read(),
                     ),
                   ),
                 ),

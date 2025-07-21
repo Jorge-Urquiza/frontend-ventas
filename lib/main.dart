@@ -11,10 +11,14 @@ import 'package:solid_products/features/invoices/data/repositories/client/client
 import 'package:solid_products/features/invoices/data/repositories/client/client_repository_remote.dart';
 import 'package:solid_products/features/invoices/data/repositories/invoice/invoice_repository.dart';
 import 'package:solid_products/features/invoices/data/repositories/invoice/invoice_repository_remote.dart';
+import 'package:solid_products/features/invoices/data/repositories/payment_condition/payment_condition_repository.dart';
+import 'package:solid_products/features/invoices/data/repositories/payment_condition/payment_condition_repository_remote.dart';
 import 'package:solid_products/features/invoices/data/repositories/product/product_repository.dart';
 import 'package:solid_products/features/invoices/data/repositories/product/product_repository_remote.dart';
 import 'package:solid_products/features/invoices/domain/model/client/client.dart';
+import 'package:solid_products/features/invoices/domain/model/invoice/invoice.dart';
 import 'package:solid_products/features/invoices/domain/model/invoice_line/invoice_line.dart';
+import 'package:solid_products/features/invoices/domain/model/payment_condition/payment_condition.dart';
 import 'package:solid_products/features/invoices/domain/model/product/product.dart';
 import 'features/products/presentation/pages/products.dart';
 
@@ -25,6 +29,7 @@ void main() {
         Provider(
           create: (context) {
             final chopperClient = ChopperClient(
+              // baseUrl: Uri.parse("http://localhost:5277/api"),
               baseUrl: Uri.parse("http://localhost:8080/api"),
               services: [ApiService.create()],
               converter: const MyConverter(
@@ -34,10 +39,14 @@ void main() {
                   Product: Product.fromJson,
                   Client: Client.fromJson,
                   ProductCalculationRequest: ProductCalculationRequest.fromJson,
-                  ProductCalculationResponse: ProductCalculationResponse.fromJson,
-                  InvoiceLine: InvoiceLine.fromJson
+                  ProductCalculationResponse:
+                      ProductCalculationResponse.fromJson,
+                  InvoiceLine: InvoiceLine.fromJson,
+                  PaymentCondition: PaymentCondition.fromJson,
+                  Invoice: Invoice.fromJson
                 },
               ),
+              errorConverter: MyConverter({}),
             );
             return chopperClient.getService<ApiService>();
           },
@@ -56,6 +65,11 @@ void main() {
           create: (context) => InvoiceRepositoryRemote(
             apiService: context.read(),
           ) as InvoiceRepository,
+        ),
+        Provider(
+          create: (context) => PaymentConditionRepositoryRemote(
+            apiService: context.read(),
+          ) as PaymentConditionRepository,
         ),
       ],
       child: const ProductsApp(),

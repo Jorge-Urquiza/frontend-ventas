@@ -7,13 +7,13 @@ part of 'invoice.dart';
 // **************************************************************************
 
 _Invoice _$InvoiceFromJson(Map<String, dynamic> json) => _Invoice(
-      nit: json['nit'] as String,
+      nit: (json['nit'] as num).toInt(),
       businessName: json['businessName'] as String,
       total: (json['total'] as num).toDouble(),
       client: json['client'] == null
           ? null
           : Client.fromJson(json['client'] as Map<String, dynamic>),
-      invoiceLines: (json['invoiceLines'] as List<dynamic>?)
+      invoiceDetails: (json['invoiceDetails'] as List<dynamic>?)
           ?.map((e) => InvoiceLine.fromJson(e as Map<String, dynamic>))
           .toList(),
       paymentCondition: json['paymentCondition'] == null
@@ -27,6 +27,6 @@ Map<String, dynamic> _$InvoiceToJson(_Invoice instance) => <String, dynamic>{
       'businessName': instance.businessName,
       'total': instance.total,
       'client': instance.client,
-      'invoiceLines': instance.invoiceLines,
+      'invoiceDetails': instance.invoiceDetails,
       'paymentCondition': instance.paymentCondition,
     };

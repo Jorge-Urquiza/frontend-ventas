@@ -11,11 +11,11 @@ part 'invoice.g.dart';
 @freezed
 abstract class Invoice with _$Invoice {
   const factory Invoice({
-    required String nit,
+    required int nit,
     required String businessName,
     required double total,
     Client? client,
-    List<InvoiceLine>? invoiceLines,
+    List<InvoiceLine>? invoiceDetails,
     PaymentCondition? paymentCondition,
   }) = _Invoice;
 

@@ -5,6 +5,7 @@ import 'package:solid_products/features/invoices/data/remote/response/product_ca
 import 'package:solid_products/features/invoices/domain/model/client/client.dart';
 import 'package:solid_products/features/invoices/domain/model/invoice/invoice.dart';
 import 'package:solid_products/features/invoices/domain/model/invoice_line/invoice_line.dart';
+import 'package:solid_products/features/invoices/domain/model/payment_condition/payment_condition.dart';
 import 'package:solid_products/features/invoices/domain/model/product/product.dart';
 
 part 'api_service.chopper.dart';
@@ -19,11 +20,14 @@ abstract class ApiService extends ChopperService {
   @GET(path: "clients")
   Future<Response<List<Client>>> getClients();
 
-  @GET(path: "invoice")
-  Future<Response<Invoice>> saveInvoice(Invoice invoice);
+  @POST(path: "invoice")
+  Future<Response<Invoice>> saveInvoice(@Body() Invoice invoice);
 
   @POST(path: "productCalculation")
   Future<Response<ProductCalculationResponse>> calculateInvoiceLine(
     @Body() ProductCalculationRequest body,
   );
+
+  @GET(path: "payment-conditions")
+  Future<Response<List<PaymentCondition>>> getPaymentConditions();
 }

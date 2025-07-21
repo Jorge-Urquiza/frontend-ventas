@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:solid_products/common/result.dart';
 import 'package:solid_products/features/invoices/data/remote/api_service.dart';
 import 'package:solid_products/features/invoices/data/remote/request/product_calculation_request.dart';
@@ -46,7 +48,7 @@ class InvoiceRepositoryRemote implements InvoiceRepository {
   @override
   Future<Result<Invoice>> save(Invoice invoice) async {
     try {
-      print(invoice.toJson());
+      print(jsonEncode(invoice));
       final response = await _apiService.saveInvoice(invoice);
       final body = response.body!;
       return Result.ok(body);

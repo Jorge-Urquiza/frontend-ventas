@@ -49,7 +49,7 @@ class MyConverter extends JsonConverter {
 
   @override
   FutureOr<Response> convertError<BodyType, InnerType>(Response response) {
-    // print("Convert error: ${response.error}");
+    print("Convert error: ${response.error}");
     return super.convertError(response);
   }
 }
